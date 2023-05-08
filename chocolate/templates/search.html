@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+Search our delicious collection of chocolates and find your perfect match! Use our search tool to browse by name, flavor, ingredient, or any other criteria you prefer. With hundreds of options available, you're sure to discover a new favorite treat. Shop now and indulge in our premium chocolate selection!
+{% endblock %}
+
+{% block content %}
+    <div>
+         <p class="text-center my_search_text">You have searched for:<b>"{{query}}"</b></p>
+    </div>
+          <div class="container">
+               <div class="row max_ato">
+                    <div class="col-md-3">
+                         <h3>Categories</h3>
+                             {% for category in categories %}
+                                <a href="#">{{ category.name }}</a><br>
+                             {% empty %}
+                                 <p>No categories found</p>
+                             {% endfor %}
+                      </div>
+                      <div class="col-md-9">
+                           {% for product in products %}
+                               <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="card text-center" style="minimum_width:18rem;">
+                                          <a href="{{product.get_url}}"><img class="card-image-top my_image" src="{{product.image.url}}" alt="{{product.name}}" width="200px"></a>
+                                             <div class="card-body">
+                                                 <h4>{{product.name}}</h4>
+                                                     <p>₹{{product.price}}</p>
+                                             </div>
+                                    </div>
+                               </div>
+                             {% empty %}
+                                <div class="mx_auto">
+                                    <p class="text-center my_search_text">0 results found</p>
+                                </div>
+                      {% endfor %}
+               </div>
+          </div>
+          </div>
+{% endblock %}
